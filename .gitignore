@@ -1,0 +1,21 @@
+# Unreal
+Game/Binaries/
+Game/DerivedDataCache/
+Game/Intermediate/
+Game/Saved/
+Game/.vs/
+Game/*.sln
+Game/*.slnx
+Game/*.VC.db
+Game/*.opensdf
+Game/*.sdf
+Game/*.suo
+Game/*.xcodeproj
+Game/*.xcworkspace
+# CMake
+build/
+out/
+CMakeUserPresets.json
+# Sistema
+.DS_Store
+Thumbs.db
