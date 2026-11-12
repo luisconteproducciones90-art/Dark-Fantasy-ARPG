@@ -142,19 +142,37 @@ Rangos: normal, **campeón** (grupo con un modificador), **élite** (2–3 modif
 Los jefes de acto tienen 2–3 fases con cambio de patrón por umbral de vida, ataques telegrafiados en el
 suelo y botín garantizado la primera vez.
 
+| Rango | Vida | Daño | Experiencia | Objetos que suelta | Duración de estados |
+|---|---|---|---|---|---|
+| Normal | ×1 | ×1 | ×1 | 0–1 (25 %) | 100 % |
+| Campeón | ×2 | ×1,25 | ×3 | 1–2 | 100 % |
+| Élite | ×4 | ×1,5 | ×5 | 2–3 | 75 % |
+| Jefe | ×15 | ×2 | ×20 | 4–6, al menos uno raro | 40 % |
+
+La experiencia es completa hasta 5 niveles por encima del monstruo; después baja 15 % por nivel, con un
+mínimo del 5 %.
+
+Implementado y probado: 7 monstruos del Acto I (uno por arquetipo), su escalado y la decisión de IA de
+cada arquetipo (`ArpgCore/Enemy`). Fases de jefe: Fase 10.
+
 ## 9. Mundo y generación procedural
 
 Las ciudades y las arenas de jefe son fijas y hechas a mano. Zonas y mazmorras se arman con **generación
 procedural controlada**: un grafo de salas (entrada → ruta crítica → ramas opcionales → salida/jefe)
 relleno con piezas modulares hechas a mano, con reglas por bioma. La semilla de la partida fija el mapa;
 misma semilla, mismo mapa (necesario para multijugador y para reproducir errores).
+Implementado y probado: generador de mazmorras (`ArpgCore/Map`) con salas sin solaparse, todo el suelo
+alcanzable desde la entrada, jefe en la sala más lejana, salas de tesoro en ramas fuera de la ruta
+principal y población sin monstruos en la entrada. Biomas, piezas modulares y eventos: pendientes.
+
 Contenido por zona: cofres, santuarios con mejora temporal, eventos, salas secretas, portales de viaje
 rápido entre ciudad y zonas descubiertas, y pergaminos de portal a la ciudad.
 
 ## 10. Progresión y dificultades
 
-Tres dificultades que se desbloquean en orden: **Peregrino**, **Penitente**, **Condenado**. Cada una sube
-nivel de monstruos, añade modificadores de élite y aplica penalización de resistencias al jugador.
+Tres dificultades que se desbloquean en orden: **Peregrino**, **Penitente**, **Condenado**. Vida de
+monstruos ×1 / ×1,75 / ×3, daño ×1 / ×1,5 / ×2,25 y +0 / +15 / +30 a sus resistencias. Añaden modificadores
+de élite y penalización de resistencias al jugador (pendientes).
 Morir: se reaparece en la ciudad; parte del oro queda en el lugar de la muerte y se recupera al volver.
 Modo opcional de **voto final** (muerte permanente).
 

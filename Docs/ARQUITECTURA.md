@@ -57,13 +57,13 @@ con validación en pruebas, para equilibrar sin recompilar.
 |---|---|---|
 | Core | `ArpgCore/Core` | RNG y tipos hechos |
 | CharacterSystem | `ArpgCore/Character` + `ArpgGame` (actor) | Atributos, clases, experiencia hechos |
-| CombatSystem | `ArpgCore/Combat` | Resolución de golpes y estados hechos |
+| CombatSystem | `ArpgCore/Combat` | Golpes, estados y criatura de combate hechos |
 | ItemSystem, InventorySystem | `ArpgCore/Item`, `ArpgCore/Inventory` | Generación de objetos, cuadrícula y equipo hechos; gemas, almacén y comercio pendientes |
 | SkillSystem | `ArpgCore/Skill` + `ArpgGame` | Fase 8 |
-| EnemySystem | `ArpgCore/Enemy` (datos) + `ArpgGame` (IA) | Fase 6 |
+| EnemySystem | `ArpgCore/Enemy` (datos y decisión de IA) + `ArpgGame` (percepción y ejecución) | Núcleo hecho; actores pendientes |
 | QuestSystem | `ArpgCore/Quest` | Fase 10 |
-| WorldSystem, MapSystem | `ArpgCore/Map` (generación) + `ArpgGame` (instanciado) | Fase 9 |
-| SaveSystem | `ArpgCore/Save` (formato) + `ArpgGame` (archivos) | Fase 11 |
+| WorldSystem, MapSystem | `ArpgCore/Map` (generación) + `ArpgGame` (instanciado) | Generador hecho; instanciado pendiente |
+| SaveSystem | `ArpgCore/Save` (formato) + `ArpgGame` (archivos) | Formato hecho; archivos pendientes |
 | UI | módulo UE `ArpgUI` | Fase 5 |
 | Audio, Settings | módulos UE `ArpgAudio`, `ArpgSettings` | Fases 5 y 13 |
 | MultiplayerSystem | módulo UE `ArpgNet` | Fase 12 |
