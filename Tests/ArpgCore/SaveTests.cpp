@@ -23,6 +23,9 @@ namespace
 		Save.Gold = 123456789012LL;
 		Save.Difficulty = EDifficulty::Penitent;
 		Save.WorldSeed = 0xDEADBEEFCAFEF00DULL;
+		Save.Depth = 7;
+		Save.LifePotions = 3;
+		Save.ManaPotions = 99;
 
 		Rng R(11);
 		ItemInstance Prev; bool bHad = false;
@@ -85,6 +88,7 @@ ARPG_TEST(Save_RoundTripPreservesEverything)
 	EXPECT_EQ(Loaded.Gold, Original.Gold);
 	EXPECT_TRUE(Loaded.Difficulty == EDifficulty::Penitent);
 	EXPECT_EQ(Loaded.WorldSeed, Original.WorldSeed);
+	EXPECT_TRUE(Loaded.Depth == 7 && Loaded.LifePotions == 3 && Loaded.ManaPotions == 99);
 	for (int Slot = 0; Slot < EquipSlotCount; ++Slot)
 	{
 		const ItemInstance* A = Original.Gear.Get(static_cast<EEquipSlot>(Slot));

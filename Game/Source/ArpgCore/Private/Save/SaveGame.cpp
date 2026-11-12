@@ -194,9 +194,15 @@ namespace arpg
 			Out.Gold = R.I64();
 			const uint8 Difficulty = R.U8();
 			Out.WorldSeed = R.U64();
+			Out.Depth = R.I32();
+			Out.LifePotions = R.I32();
+			Out.ManaPotions = R.I32();
 			if (!R.bOk || Class >= static_cast<uint8>(ECharacterClass::Count)
 				|| Difficulty >= static_cast<uint8>(EDifficulty::Count)
-				|| P.Level < 1 || P.Level > MaxCharacterLevel || Out.Gold < 0)
+				|| P.Level < 1 || P.Level > MaxCharacterLevel || Out.Gold < 0
+				|| Out.Depth < 1 || Out.Depth > MaxDepth
+				|| Out.LifePotions < 0 || Out.LifePotions > MaxPotions
+				|| Out.ManaPotions < 0 || Out.ManaPotions > MaxPotions)
 			{
 				return false;
 			}
@@ -259,6 +265,9 @@ namespace arpg
 		W.I64(Save.Gold);
 		W.U8(static_cast<uint8>(Save.Difficulty));
 		W.U64(Save.WorldSeed);
+		W.I32(Clamp(Save.Depth, 1, MaxDepth));
+		W.I32(Clamp(Save.LifePotions, 0, MaxPotions));
+		W.I32(Clamp(Save.ManaPotions, 0, MaxPotions));
 
 		for (int Slot = 0; Slot < EquipSlotCount; ++Slot)
 		{

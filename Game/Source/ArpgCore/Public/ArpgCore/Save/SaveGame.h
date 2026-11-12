@@ -13,6 +13,8 @@ namespace arpg
 	inline constexpr int32 BagWidth = 10, BagHeight = 4;
 	inline constexpr int32 StashWidth = 10, StashHeight = 10;
 	inline constexpr int MaxCharacterNameLength = 23;
+	inline constexpr int32 MaxDepth = 9999;
+	inline constexpr int32 MaxPotions = 99;
 
 	/** Todo lo que se guarda de un personaje. */
 	struct CharacterSave
@@ -22,6 +24,9 @@ namespace arpg
 		int64 Gold = 0;
 		EDifficulty Difficulty = EDifficulty::Pilgrim;
 		uint64 WorldSeed = 0;
+		int32 Depth = 1;          // nivel de mazmorra alcanzado
+		int32 LifePotions = 0;
+		int32 ManaPotions = 0;
 		Equipment Gear;
 		GridInventory Bag{BagWidth, BagHeight};
 		GridInventory Stash{StashWidth, StashHeight};
