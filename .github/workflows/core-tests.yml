@@ -19,3 +19,9 @@ jobs:
         run: cmake --build build --config Release
       - name: Test
         run: ctest --test-dir build -C Release --output-on-failure
+      # Unreal compila los .cpp de un módulo agrupados; esto detecta choques de nombres entre archivos.
+      - name: Unity build
+        run: |
+          cmake -S . -B build-unity -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=0
+          cmake --build build-unity --config Release
+          ctest --test-dir build-unity -C Release --output-on-failure

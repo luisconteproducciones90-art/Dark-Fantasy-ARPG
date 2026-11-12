@@ -57,8 +57,8 @@ con validación en pruebas, para equilibrar sin recompilar.
 |---|---|---|
 | Core | `ArpgCore/Core` | RNG y tipos hechos |
 | CharacterSystem | `ArpgCore/Character` + `ArpgGame` (actor) | Atributos, clases, experiencia hechos |
-| CombatSystem | `ArpgCore/Combat` | Resolución de golpes hecha; estados pendientes |
-| ItemSystem, InventorySystem | `ArpgCore/Item`, `ArpgCore/Inventory` | Fases 6–7 |
+| CombatSystem | `ArpgCore/Combat` | Resolución de golpes y estados hechos |
+| ItemSystem, InventorySystem | `ArpgCore/Item`, `ArpgCore/Inventory` | Generación de objetos, cuadrícula y equipo hechos; gemas, almacén y comercio pendientes |
 | SkillSystem | `ArpgCore/Skill` + `ArpgGame` | Fase 8 |
 | EnemySystem | `ArpgCore/Enemy` (datos) + `ArpgGame` (IA) | Fase 6 |
 | QuestSystem | `ArpgCore/Quest` | Fase 10 |

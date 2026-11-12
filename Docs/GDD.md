@@ -99,8 +99,11 @@ inmovilizarlos), **veneno** (daño en el tiempo, anula regeneración), **aturdim
 (el siguiente golpe salta a enemigos cercanos), **maldición** (baja resistencias). Los jefes tienen
 duración reducida de estados de control.
 
-Implementado y probado hoy: impacto, bloqueo, crítico, armadura y resistencias (`ArpgCore/Combat`).
-Estados e invocaciones: Fase 4 y Fase 8.
+Los estados no se acumulan: al reaplicar uno gana el más fuerte en duración, daño y magnitud. El daño en
+el tiempo se calcula en milisegundos enteros, así que no depende de los fotogramas por segundo.
+
+Implementado y probado: impacto, bloqueo, crítico, armadura, resistencias y los siete estados
+(`ArpgCore/Combat`). Salto de la electrocución e invocaciones: Fase 8.
 
 ## 7. Objetos e inventario
 
@@ -117,7 +120,15 @@ ciudad; pestaña compartida entre personajes de la misma cuenta local (opcional)
 | Legendario | 5–6 + 1 poder fijo | Poder que altera una habilidad |
 | Mítico | Fijas, diseñadas a mano | Uno equipado a la vez; definen una forma de jugar |
 
-Cada propiedad tiene niveles según el nivel del objeto, que depende del nivel del monstruo y la zona.
+Cada propiedad crece con el nivel del objeto, que depende del nivel del monstruo y la zona. Un objeto
+nunca repite propiedad y cada tipo solo admite las suyas (un arma no da resistencias; unas botas no dan
+daño). Probabilidad base por caída de un monstruo normal: legendario 0,2 %, épico 1,5 %, raro 7 %, mágico
+30 %. Campeones ×2, élites ×3, jefes ×6. El **hallazgo mágico** las mejora con rendimientos decrecientes
+(100 % rinde +71 %; el techo es +250 %). Los míticos no salen del generador: se obtienen de fuentes fijas.
+
+Implementado y probado: generación de objetos, rareza, cuadrícula, equipo con requisitos, estadísticas con
+equipo y valor de venta (`ArpgCore/Item`, `ArpgCore/Inventory`). Hay 14 tipos base de ejemplo; el catálogo
+completo llega con los archivos de datos.
 Gemas (5 tipos × 5 calidades) se engarzan en huecos. Comparación automática con lo equipado, arrastrar y
 soltar, compra, venta y recompra en mercaderes, comercio entre jugadores con ventana de confirmación doble.
 
