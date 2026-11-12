@@ -6,32 +6,32 @@ namespace arpg
 {
 	namespace
 	{
-		using T = EItemType;
+		using Typ = EItemType;
 
 		constexpr ItemBase BaseTable[] = {
 			// Id               Tipo          An Al Niv Fue Arm  Daño      Bloq
-			{"leather_cap",     T::Helmet,    2, 2,  1,  0,  4, {0, 0},    0},
-			{"iron_helm",       T::Helmet,    2, 2, 12, 30, 14, {0, 0},    0},
-			{"padded_coat",     T::BodyArmor, 2, 3,  1,  0,  8, {0, 0},    0},
-			{"chain_hauberk",   T::BodyArmor, 2, 3, 15, 45, 30, {0, 0},    0},
-			{"hide_gloves",     T::Gloves,    2, 2,  1,  0,  2, {0, 0},    0},
-			{"worn_boots",      T::Boots,     2, 2,  1,  0,  2, {0, 0},    0},
-			{"rope_belt",       T::Belt,      2, 1,  1,  0,  1, {0, 0},    0},
-			{"short_sword",     T::Weapon,    1, 3,  1,  0,  0, {3, 7},    0},
-			{"war_axe",         T::Weapon,    2, 3, 10, 40,  0, {8, 18},   0},
-			{"hunting_bow",     T::Weapon,    2, 4,  1,  0,  0, {2, 9},    0},
-			{"ash_staff",       T::Weapon,    1, 4,  1,  0,  0, {2, 5},    0},
-			{"round_shield",    T::Shield,    2, 2,  1,  0,  5, {0, 0},   15},
-			{"copper_ring",     T::Ring,      1, 1,  1,  0,  0, {0, 0},    0},
-			{"bone_amulet",     T::Amulet,    1, 1,  1,  0,  0, {0, 0},    0},
+			{"leather_cap",     Typ::Helmet,    2, 2,  1,  0,  4, {0, 0},    0},
+			{"iron_helm",       Typ::Helmet,    2, 2, 12, 30, 14, {0, 0},    0},
+			{"padded_coat",     Typ::BodyArmor, 2, 3,  1,  0,  8, {0, 0},    0},
+			{"chain_hauberk",   Typ::BodyArmor, 2, 3, 15, 45, 30, {0, 0},    0},
+			{"hide_gloves",     Typ::Gloves,    2, 2,  1,  0,  2, {0, 0},    0},
+			{"worn_boots",      Typ::Boots,     2, 2,  1,  0,  2, {0, 0},    0},
+			{"rope_belt",       Typ::Belt,      2, 1,  1,  0,  1, {0, 0},    0},
+			{"short_sword",     Typ::Weapon,    1, 3,  1,  0,  0, {3, 7},    0},
+			{"war_axe",         Typ::Weapon,    2, 3, 10, 40,  0, {8, 18},   0},
+			{"hunting_bow",     Typ::Weapon,    2, 4,  1,  0,  0, {2, 9},    0},
+			{"ash_staff",       Typ::Weapon,    1, 4,  1,  0,  0, {2, 5},    0},
+			{"round_shield",    Typ::Shield,    2, 2,  1,  0,  5, {0, 0},   15},
+			{"copper_ring",     Typ::Ring,      1, 1,  1,  0,  0, {0, 0},    0},
+			{"bone_amulet",     Typ::Amulet,    1, 1,  1,  0,  0, {0, 0},    0},
 		};
 		constexpr int32 BaseCount = static_cast<int32>(sizeof(BaseTable) / sizeof(BaseTable[0]));
 
 		constexpr uint32 Bit(EItemType Type) { return 1u << static_cast<unsigned>(Type); }
-		constexpr uint32 Wearable = Bit(T::Helmet) | Bit(T::BodyArmor) | Bit(T::Gloves) | Bit(T::Boots) | Bit(T::Belt);
-		constexpr uint32 Jewelry = Bit(T::Ring) | Bit(T::Amulet);
-		constexpr uint32 All = Wearable | Jewelry | Bit(T::Weapon) | Bit(T::Shield);
-		constexpr uint32 NotWeapon = All & ~Bit(T::Weapon);
+		constexpr uint32 Wearable = Bit(Typ::Helmet) | Bit(Typ::BodyArmor) | Bit(Typ::Gloves) | Bit(Typ::Boots) | Bit(Typ::Belt);
+		constexpr uint32 Jewelry = Bit(Typ::Ring) | Bit(Typ::Amulet);
+		constexpr uint32 All = Wearable | Jewelry | Bit(Typ::Weapon) | Bit(Typ::Shield);
+		constexpr uint32 NotWeapon = All & ~Bit(Typ::Weapon);
 
 		struct AffixDef
 		{
@@ -47,20 +47,20 @@ namespace arpg
 			/* Dexterity  */ {1, 3, 8, All},
 			/* Vitality   */ {1, 3, 8, All},
 			/* Energy     */ {1, 3, 8, All},
-			/* Life       */ {5, 10, 10, Wearable | Bit(T::Shield) | Bit(T::Amulet)},
-			/* Mana       */ {5, 10, 10, Bit(T::Helmet) | Jewelry | Bit(T::Weapon)},
-			/* AttackRat. */ {10, 20, 10, Bit(T::Weapon) | Bit(T::Gloves) | Jewelry},
-			/* Defense    */ {5, 10, 10, Wearable | Bit(T::Shield)},
-			/* Armor      */ {3, 6, 10, Wearable | Bit(T::Shield)},
+			/* Life       */ {5, 10, 10, Wearable | Bit(Typ::Shield) | Bit(Typ::Amulet)},
+			/* Mana       */ {5, 10, 10, Bit(Typ::Helmet) | Jewelry | Bit(Typ::Weapon)},
+			/* AttackRat. */ {10, 20, 10, Bit(Typ::Weapon) | Bit(Typ::Gloves) | Jewelry},
+			/* Defense    */ {5, 10, 10, Wearable | Bit(Typ::Shield)},
+			/* Armor      */ {3, 6, 10, Wearable | Bit(Typ::Shield)},
 			/* ResFire    */ {3, 6, 4, NotWeapon},
 			/* ResCold    */ {3, 6, 4, NotWeapon},
 			/* ResLightn. */ {3, 6, 4, NotWeapon},
 			/* ResPoison  */ {3, 6, 4, NotWeapon},
 			/* ResShadow  */ {3, 6, 4, NotWeapon},
-			/* Crit ‰     */ {5, 10, 2, Bit(T::Weapon) | Bit(T::Gloves) | Jewelry},
-			/* AddedPhys  */ {1, 3, 10, Bit(T::Weapon) | Bit(T::Ring)},
-			/* LifeOnHit  */ {1, 2, 4, Bit(T::Weapon) | Bit(T::Ring)},
-			/* MagicFind  */ {3, 6, 2, Bit(T::Helmet) | Bit(T::Gloves) | Bit(T::Boots) | Jewelry},
+			/* Crit ‰     */ {5, 10, 2, Bit(Typ::Weapon) | Bit(Typ::Gloves) | Jewelry},
+			/* AddedPhys  */ {1, 3, 10, Bit(Typ::Weapon) | Bit(Typ::Ring)},
+			/* LifeOnHit  */ {1, 2, 4, Bit(Typ::Weapon) | Bit(Typ::Ring)},
+			/* MagicFind  */ {3, 6, 2, Bit(Typ::Helmet) | Bit(Typ::Gloves) | Bit(Typ::Boots) | Jewelry},
 		};
 		static_assert(sizeof(AffixTable) / sizeof(AffixTable[0]) == static_cast<unsigned>(EAffixStat::Count));
 

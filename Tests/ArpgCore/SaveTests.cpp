@@ -7,10 +7,16 @@ using namespace arpg;
 
 namespace
 {
+	void SetName(CharacterSave& Save, const char* Text)
+	{
+		std::memset(Save.Name, 0, sizeof(Save.Name));
+		std::memcpy(Save.Name, Text, std::strlen(Text) < sizeof(Save.Name) - 1 ? std::strlen(Text) : sizeof(Save.Name) - 1);
+	}
+
 	CharacterSave MakeRichSave()
 	{
 		CharacterSave Save;
-		std::strcpy(Save.Name, "Mirel");
+		SetName(Save, "Mirel");
 		Save.Progress = CreateCharacter(ECharacterClass::Warrior);
 		AddExperience(Save.Progress, 250000);
 		SpendAttributePoints(Save.Progress, EAttribute::Strength, 20);
@@ -154,7 +160,7 @@ namespace
 ARPG_TEST(Save_ValidatesContentEvenWithGoodChecksum)
 {
 	CharacterSave Fresh;
-	std::strcpy(Fresh.Name, "Ab");
+	SetName(Fresh, "Ab");
 	Fresh.Progress = CreateCharacter(ECharacterClass::Hunter);
 	std::vector<uint8> Clean;
 	SerializeCharacter(Fresh, Clean);

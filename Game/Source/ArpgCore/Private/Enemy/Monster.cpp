@@ -8,19 +8,19 @@ namespace arpg
 {
 	namespace
 	{
-		using B = EMonsterBehavior;
-		using D = EDamageType;
+		using Beh = EMonsterBehavior;
+		using Dmg = EDamageType;
 
 		// Acto I. Resistencias: físico, fuego, frío, rayo, veneno, sombra, sagrado.
 		constexpr MonsterDef MonsterTable[] = {
 			// Id                Conducta        Vida +Nv  Daño    %Nv Tipo         Arm  Resistencias                   XP  Alcance
-			{"ash_walker",       B::MeleeChaser, 30, 12, {3, 6},   12, D::Physical, 2, {0, 25, -25, 0, 0, 0, -25},      20, 150},
-			{"bone_archer",      B::RangedKiter, 20,  8, {2, 7},   12, D::Physical, 1, {0, 0, 0, 0, 50, 0, -25},        24, 1200},
-			{"mire_boar",        B::Charger,     45, 16, {5, 9},   12, D::Physical, 3, {0, 0, 0, 0, 0, 0, 0},           28, 180},
-			{"grave_caller",     B::Summoner,    25,  9, {3, 5},   12, D::Shadow,   1, {0, 0, 0, 0, 0, 50, -50},        36, 900},
-			{"cinder_acolyte",   B::Support,     25, 10, {2, 5},   12, D::Fire,     1, {0, 50, -25, 0, 0, 0, 0},        32, 800},
-			{"burrower",         B::Ambusher,    28, 11, {5, 10},  12, D::Poison,   2, {0, 0, 0, 0, 75, 0, 0},          26, 160},
-			{"bloat",            B::Exploder,    18,  7, {10, 16}, 14, D::Fire,     0, {0, -25, 0, 0, 0, 0, 0},         22, 200},
+			{"ash_walker",       Beh::MeleeChaser, 30, 12, {3, 6},   12, Dmg::Physical, 2, {0, 25, -25, 0, 0, 0, -25},      20, 150},
+			{"bone_archer",      Beh::RangedKiter, 20,  8, {2, 7},   12, Dmg::Physical, 1, {0, 0, 0, 0, 50, 0, -25},        24, 1200},
+			{"mire_boar",        Beh::Charger,     45, 16, {5, 9},   12, Dmg::Physical, 3, {0, 0, 0, 0, 0, 0, 0},           28, 180},
+			{"grave_caller",     Beh::Summoner,    25,  9, {3, 5},   12, Dmg::Shadow,   1, {0, 0, 0, 0, 0, 50, -50},        36, 900},
+			{"cinder_acolyte",   Beh::Support,     25, 10, {2, 5},   12, Dmg::Fire,     1, {0, 50, -25, 0, 0, 0, 0},        32, 800},
+			{"burrower",         Beh::Ambusher,    28, 11, {5, 10},  12, Dmg::Poison,   2, {0, 0, 0, 0, 75, 0, 0},          26, 160},
+			{"bloat",            Beh::Exploder,    18,  7, {10, 16}, 14, Dmg::Fire,     0, {0, -25, 0, 0, 0, 0, 0},         22, 200},
 		};
 		constexpr int32 MonsterCount = static_cast<int32>(sizeof(MonsterTable) / sizeof(MonsterTable[0]));
 
