@@ -27,4 +27,6 @@ enable_testing()
 file(GLOB TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/Tests/ArpgCore/*.cpp)
 add_executable(ArpgCoreTests ${TEST_SOURCES})
 target_link_libraries(ArpgCoreTests PRIVATE ArpgCore)
+# El modo unity (-DCMAKE_UNITY_BUILD=ON) imita cómo Unreal compila el módulo; las pruebas quedan fuera.
+set_target_properties(ArpgCoreTests PROPERTIES UNITY_BUILD OFF)
 add_test(NAME ArpgCoreTests COMMAND ArpgCoreTests)
