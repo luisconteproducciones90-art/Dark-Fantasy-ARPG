@@ -25,12 +25,12 @@ estado distinto y se dice.
 - `ArpgCore` compila sin avisos con GCC 13 y Clang 18 (`-Wall -Wextra -Wpedantic -Wshadow -Wconversion -Werror`,
   sin excepciones ni RTTI).
 - 19 pruebas automáticas pasan, también bajo AddressSanitizer y UBSan.
+- GitHub Actions compila y pasa las mismas pruebas en Linux y en Windows (MSVC, `/W4 /WX`).
 
 ## No verificado
 
 - Todo `Game/Source/ArpgGame`, los `.Target.cs`, `.Build.cs`, el `.uproject` y `Game/Config`: nunca han
   pasado por Unreal Build Tool.
-- La compilación de `ArpgCore` con MSVC (la hará GitHub Actions en el primer push).
 
 ## Pendientes inmediatos
 
