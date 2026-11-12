@@ -12,6 +12,5 @@ public class ArpgGame : ModuleRules
 		{
 			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "ArpgCore"
 		});
-		PrivateDependencyModuleNames.AddRange(new string[] { "AIModule", "NavigationSystem" });
 	}
 }

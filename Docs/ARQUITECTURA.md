@@ -47,6 +47,17 @@ multijugador las semillas solo existen en el servidor.
 Las acciones de Enhanced Input se crean en C++ en vez de en assets, para que el control funcione desde un
 clon limpio del repositorio. Cuando exista menú de reasignación de teclas (Settings) pasarán a datos.
 
+### ADR-6 · Caminos sobre la cuadrícula, no malla de navegación
+El movimiento del jugador y de los monstruos usa A* sobre la cuadrícula de la mazmorra (`ArpgCore/Map`),
+no la malla de navegación de Unreal. Motivos: la mazmorra se genera al vuelo y ya es una cuadrícula; el
+servidor podrá validar movimientos con el mismo código; y se prueba sin motor. Cuando haya escenarios
+hechos a mano (ciudades) se evaluará la malla de navegación para esos mapas.
+
+### ADR-7 · El juego arranca sin assets propios
+`AArpgGameMode` construye la mazmorra, la luz, el personaje y los monstruos sobre el mapa vacío del motor,
+con formas básicas de Unreal. Así un clon limpio del repositorio es jugable y cada sistema se puede probar
+antes de que exista el arte. El arte sustituirá esas formas sin tocar las reglas.
+
 ### ADR-5 · Datos de equilibrio
 Hoy son tablas `constexpr` en `ArpgCore`. En la Fase 7 pasan a archivos de datos (JSON) cargados al inicio,
 con validación en pruebas, para equilibrar sin recompilar.
@@ -59,12 +70,12 @@ con validación en pruebas, para equilibrar sin recompilar.
 | CharacterSystem | `ArpgCore/Character` + `ArpgGame` (actor) | Atributos, clases, experiencia hechos |
 | CombatSystem | `ArpgCore/Combat` | Golpes, estados y criatura de combate hechos |
 | ItemSystem, InventorySystem | `ArpgCore/Item`, `ArpgCore/Inventory` | Generación de objetos, cuadrícula y equipo hechos; gemas, almacén y comercio pendientes |
-| SkillSystem | `ArpgCore/Skill` + `ArpgGame` | Fase 8 |
+| SkillSystem | `ArpgCore/Skill` + `ArpgGame` | Una habilidad activa por clase, coste y enfriamiento hechos; árboles pendientes |
 | EnemySystem | `ArpgCore/Enemy` (datos y decisión de IA) + `ArpgGame` (percepción y ejecución) | Núcleo hecho; actores pendientes |
 | QuestSystem | `ArpgCore/Quest` | Fase 10 |
 | WorldSystem, MapSystem | `ArpgCore/Map` (generación) + `ArpgGame` (instanciado) | Generador hecho; instanciado pendiente |
 | SaveSystem | `ArpgCore/Save` (formato) + `ArpgGame` (archivos) | Formato hecho; archivos pendientes |
-| UI | módulo UE `ArpgUI` | Fase 5 |
+| UI | `ArpgGame/ArpgHUD` por ahora; módulo `ArpgUI` cuando haya UMG con arte | HUD por código escrito |
 | Audio, Settings | módulos UE `ArpgAudio`, `ArpgSettings` | Fases 5 y 13 |
 | MultiplayerSystem | módulo UE `ArpgNet` | Fase 12 |
 | ServerSystem | `Server/` (servicio de cuentas y persistencia, PostgreSQL) | Fase 12 |

@@ -25,10 +25,38 @@ escriben aquí pero **solo se pueden compilar y probar en una máquina Windows c
 
 1. Clonar el repositorio y ejecutar `git lfs install`.
 2. Clic derecho en `Game/DarkFantasyARPG.uproject` → *Generate Visual Studio project files*.
-3. Abrir el `.uproject`; aceptar compilar los módulos.
-4. Crear un nivel con un suelo y un **NavMeshBoundsVolume** que lo cubra, colocar un *Player Start* y
-   pulsar Play. El modo de juego ya asigna personaje y controlador isométricos.
-5. Si algo no compila, copiar el error completo: se corrige en la siguiente sesión.
+3. Abrir el `.uproject` y aceptar compilar los módulos.
+4. Pulsar **Play**. No hay que crear niveles ni assets: el juego genera la mazmorra, la luz, el personaje y
+   los monstruos al empezar, sobre el mapa vacío del motor.
+5. Si algo no compila, copiar el error completo de la ventana *Output* de Visual Studio (o el archivo
+   `Game/Saved/Logs/*.log`): se corrige en la siguiente sesión. Es normal que haya errores la primera vez;
+   este código nunca ha pasado por el compilador de Unreal.
+
+### Controles de la versión de prueba
+
+| Entrada | Acción |
+|---|---|
+| Clic izquierdo en el suelo | Caminar (clic corto: ruta esquivando muros; mantenido: seguir el cursor) |
+| Clic izquierdo en un monstruo | Acercarse y atacar hasta que muera |
+| Clic izquierdo en botín | Ir a recogerlo |
+| Clic derecho | Habilidad de la clase (gasta maná, tiene enfriamiento) |
+| 1 / 2 | Poción de vida / de maná |
+| I | Inventario: clic equipa, clic derecho suelta, clic en lo equipado lo quita, `+` sube atributos |
+| Rueda | Zoom |
+| Consola (`º` o `~`): `ArpgNuevoPersonaje N` | Personaje nuevo: 0 Guerrero, 1 Hechicero, 2 Cazador, 3 Nigromante, 4 Asesino, 5 Paladín |
+
+### Qué debería verse
+
+- Una mazmorra oscura de suelo y muros bajos, con el personaje (un cilindro) iluminado por su antorcha.
+- Monstruos como conos: grises los normales, azules los campeones, amarillos los élites y uno rojo grande,
+  el jefe. Los "excavadores" asoman apenas del suelo hasta que te acercas.
+- Esfera roja de vida abajo a la izquierda y azul de maná abajo a la derecha, barra central, minimapa
+  arriba a la derecha y objetivo arriba a la izquierda.
+- Al matar al jefe se baja a una mazmorra nueva, más grande y con monstruos de más nivel. La partida se
+  guarda al bajar y al salir, en `Game/Saved/SaveGames/Personaje.vhsv` (con copia `.bak`).
+
+Las figuras geométricas y las líneas de colores de los ataques son provisionales: sustituyen a modelos,
+animaciones y partículas que todavía no existen.
 
 ## Pruebas del núcleo (cualquier sistema operativo)
 
