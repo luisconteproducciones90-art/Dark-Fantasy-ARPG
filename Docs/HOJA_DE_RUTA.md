@@ -31,6 +31,13 @@ juegue, ninguna de esas casillas cuenta como hecha.
 - 68 pruebas automáticas pasan, también bajo AddressSanitizer y UBSan, y en modo *unity build* (como compila Unreal).
 - GitHub Actions compila y pasa las mismas pruebas en Linux y en Windows (MSVC, `/W4 /WX`).
 
+## Primera compilación real (Unreal 5.8, MSVC 14.44, 12-11-2026)
+
+- `ArpgCore` compiló y enlazó dentro de Unreal sin errores.
+- `ArpgGame`: 9 de 10 archivos compilaron a la primera; `ArpgGameMode.cpp` falló por una constante mal
+  nombrada (`FILEOPEN_Silent` en lugar de `FILEREAD_Silent`), ya corregida. Pendiente de confirmar que con
+  eso compila y enlaza todo, y de ejecutar el juego.
+
 ## No verificado
 
 - Todo `Game/Source/ArpgGame`, los `.Target.cs`, `.Build.cs`, el `.uproject` y `Game/Config`: nunca han

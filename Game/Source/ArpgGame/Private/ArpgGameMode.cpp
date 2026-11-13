@@ -36,7 +36,7 @@ void AArpgGameMode::InitGame(const FString& MapName, const FString& Options, FSt
 	// Partida guardada, si existe y es válida. Un archivo dañado no se toca: se empieza de cero
 	// y la copia .bak sigue ahí.
 	TArray<uint8> Bytes;
-	if (FFileHelper::LoadFileToArray(Bytes, *GetSavePath(), FILEOPEN_Silent))
+	if (FFileHelper::LoadFileToArray(Bytes, *GetSavePath(), FILEREAD_Silent))
 	{
 		const arpg::ESaveResult Result =
 			arpg::DeserializeCharacter(Bytes.GetData(), static_cast<std::size_t>(Bytes.Num()), LoadedSave);
